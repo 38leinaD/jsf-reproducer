@@ -1,30 +1,32 @@
 # jsf-reproducer project
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
-If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
-
-## Running the application in dev mode
-
-You can run your application in dev mode that enables live coding using:
 ```
-./mvnw quarkus:dev
+./mvnw clean package
 ```
 
-## Packaging and running the application
+```
+[ERROR]     [error]: Build step io.quarkus.arc.deployment.ArcProcessor#generateResources threw an exception: java.lang.NullPointerException
+[ERROR]     at io.quarkus.arc.processor.AsmUtilCopy.needsSignature(AsmUtilCopy.java:261)
+[ERROR]     at io.quarkus.arc.processor.AsmUtilCopy.needsSignature(AsmUtilCopy.java:232)
+[ERROR]     at io.quarkus.arc.processor.ClientProxyGenerator.generate(ClientProxyGenerator.java:117)
+[ERROR]     at io.quarkus.arc.processor.BeanProcessor.generateResources(BeanProcessor.java:185)
+[ERROR]     at io.quarkus.arc.deployment.ArcProcessor.generateResources(ArcProcessor.java:448)
+[ERROR]     at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[ERROR]     at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+[ERROR]     at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+[ERROR]     at java.lang.reflect.Method.invoke(Method.java:498)
+[ERROR]     at io.quarkus.deployment.ExtensionLoader$2.execute(ExtensionLoader.java:936)
+[ERROR]     at io.quarkus.builder.BuildContext.run(BuildContext.java:277)
+[ERROR]     at org.jboss.threads.ContextClassLoaderSavingRunnable.run(ContextClassLoaderSavingRunnable.java:35)
+[ERROR]     at org.jboss.threads.EnhancedQueueExecutor.safeRun(EnhancedQueueExecutor.java:2046)
+[ERROR]     at org.jboss.threads.EnhancedQueueExecutor$ThreadBody.doRunTask(EnhancedQueueExecutor.java:1578)
+[ERROR]     at org.jboss.threads.EnhancedQueueExecutor$ThreadBody.run(EnhancedQueueExecutor.java:1452)
+[ERROR]     at java.lang.Thread.run(Thread.java:748)
+[ERROR]     at org.jboss.threads.JBossThread.run(JBossThread.java:479)
+[ERROR] -> [Help 1]
+```
 
-The application can be packaged using `./mvnw package`.
-It produces the `jsf-reproducer-1.0.0-SNAPSHOT-runner.jar` file in the `/target` directory.
-Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/lib` directory.
-
-The application is now runnable using `java -jar target/jsf-reproducer-1.0.0-SNAPSHOT-runner.jar`.
-
-## Creating a native executable
-
-You can create a native executable using: `./mvnw package -Pnative`.
-
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using: `./mvnw package -Pnative -Dquarkus.native.container-build=true`.
-
-You can then execute your native executable with: `./target/jsf-reproducer-1.0.0-SNAPSHOT-runner`
-
-If you want to learn more about building native executables, please consult https://quarkus.io/guides/building-native-image.
+```
+PRODUCER METHOD bean [types=[java.lang.Object], qualifiers=[@Default, @Any, @Named(value = "session")], target=java.lang.Object getSession(), declaringBean=org.apache.myfaces.cdi.JsfArtifactProducer]
+```
